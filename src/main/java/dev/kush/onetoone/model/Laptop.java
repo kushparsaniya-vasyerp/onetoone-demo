@@ -1,5 +1,7 @@
 package dev.kush.onetoone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -14,6 +16,7 @@ import lombok.*;
 public class Laptop {
 
     @Id  @GeneratedValue
+    @JsonIgnore
     private Long laptopId;
     private String laptopBrand;
     private String ram;

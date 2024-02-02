@@ -1,5 +1,6 @@
 package dev.kush.onetoone.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import lombok.*;
 public class Student {
 
     @Id @GeneratedValue
+    @JsonIgnore
     private Long studentId;
     private String studentName;
     private String studentEmail;
