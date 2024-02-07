@@ -23,7 +23,7 @@ import static java.nio.file.StandardOpenOption.CREATE;
 @Service
 public class FileServiceImpl implements FileService {
 
-//    @Value("${upload.dir}")
+    //    @Value("${upload.dir}")
     private static final String UPLOAD_DIR = "C:\\Users\\kushparsaniya\\Desktop\\upload";
 
     @Override
@@ -31,14 +31,14 @@ public class FileServiceImpl implements FileService {
         try {
             File directory = new File(UPLOAD_DIR);
 
-            if (!directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdirs();
             }
 
             String fileName = file.getOriginalFilename();
             Path filePath = Paths.get(UPLOAD_DIR).resolve(fileName);
 
-            Files.write(filePath,file.getBytes(), CREATE);
+            Files.write(filePath, file.getBytes(), CREATE);
 
             String downloadUrl = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
@@ -47,7 +47,7 @@ public class FileServiceImpl implements FileService {
                     .toUriString();
             return ResponseEntity.ok("successfully uploaded file here is download link : " + downloadUrl);
         } catch (Exception e) {
-            throw  new FileHandleException("could not upload file ");
+            throw new FileHandleException("could not upload file ");
         }
     }
 
@@ -57,14 +57,14 @@ public class FileServiceImpl implements FileService {
             Path filePath = Paths.get(UPLOAD_DIR).resolve(fileName).normalize();
             File file = filePath.toFile();
 
-            if (file.exists()){
+            if (file.exists()) {
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-                headers.setContentDispositionFormData("attachment",fileName);
-                return new ResponseEntity<>(new FileSystemResource(file), headers,HttpStatus.OK);
+                headers.setContentDispositionFormData("attachment", fileName);
+                return new ResponseEntity<>(new FileSystemResource(file), headers, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("file not found",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("file not found", HttpStatus.NOT_FOUND);
             }
 
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class FileServiceImpl implements FileService {
             Path filePath = Paths.get(UPLOAD_DIR).resolve(appendFileDto.fileName()).normalize();
 
             if (!Files.exists(filePath)) {
-                return new ResponseEntity<>("File not found.",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("File not found.", HttpStatus.NOT_FOUND);
             }
 
 
@@ -93,12 +93,12 @@ public class FileServiceImpl implements FileService {
     @Override
     public ResponseEntity<String> deleteFile(String fileName) {
         try {
-            Path filePath =  Paths.get(UPLOAD_DIR).resolve(fileName).normalize();
+            Path filePath = Paths.get(UPLOAD_DIR).resolve(fileName).normalize();
 
-            if (Files.deleteIfExists(filePath)){
+            if (Files.deleteIfExists(filePath)) {
                 return ResponseEntity.ok("successfully deleted file");
             } else {
-                return new ResponseEntity<>("File not found.",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("File not found.", HttpStatus.NOT_FOUND);
             }
 
         } catch (Exception e) {
