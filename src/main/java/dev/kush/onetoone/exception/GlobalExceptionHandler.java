@@ -1,6 +1,5 @@
 package dev.kush.onetoone.exception;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -20,7 +19,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ExceptionMessage(ex.getMessage(), LocalDateTime.now(), NOT_FOUND);
     }
 
-    @ExceptionHandler(UploadFileException.class)
+    @ExceptionHandler(FileHandleException.class)
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     public Object UploadFileExceptionHandler(Exception ex, WebRequest request){
         return new ExceptionMessage(ex.getMessage(), LocalDateTime.now(), valueOf(500));

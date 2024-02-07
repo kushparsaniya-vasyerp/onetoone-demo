@@ -26,4 +26,9 @@ public class FileController {
     public ResponseEntity<String> appendFile(@RequestBody AppendFileDto appendFileDto){
         return fileService.appendFile(appendFileDto);
     }
+
+    @DeleteMapping("/delete/{fileName}")
+    public ResponseEntity<String> deleteFile(@PathVariable String fileName){
+        return fileService.deleteFile(fileName);
+    }
 }

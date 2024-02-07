@@ -1,7 +1,7 @@
 package dev.kush.onetoone.service.impl;
 
 import dev.kush.onetoone.dto.AppendFileDto;
-import dev.kush.onetoone.exception.UploadFileException;
+import dev.kush.onetoone.exception.FileHandleException;
 import dev.kush.onetoone.service.FileService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -47,7 +47,7 @@ public class FileServiceImpl implements FileService {
                     .toUriString();
             return ResponseEntity.ok("successfully uploaded file here is download link : " + downloadUrl);
         } catch (Exception e) {
-            throw  new UploadFileException("could not upload file ");
+            throw  new FileHandleException("could not upload file ");
         }
     }
 
@@ -62,14 +62,13 @@ public class FileServiceImpl implements FileService {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
                 headers.setContentDispositionFormData("attachment",fileName);
-
                 return new ResponseEntity<>(new FileSystemResource(file), headers,HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("file not found",HttpStatus.NOT_FOUND);
             }
 
         } catch (Exception e) {
-            throw new UploadFileException("could not download file " + fileName);
+            throw new FileHandleException("could not download file " + fileName);
         }
     }
 
@@ -79,16 +78,34 @@ public class FileServiceImpl implements FileService {
             Path filePath = Paths.get(UPLOAD_DIR).resolve(appendFileDto.fileName()).normalize();
 
             if (!Files.exists(filePath)) {
-                throw new UploadFileException("File not found.");
+                return new ResponseEntity<>("File not found.",HttpStatus.NOT_FOUND);
             }
 
 
             Files.write(filePath, appendFileDto.content().getBytes(), APPEND);
             return ResponseEntity.ok("successfully appended file");
         } catch (Exception e) {
-            throw new UploadFileException("could not write file ");
+            throw new FileHandleException("could not write file ");
         }
 
     }
+
+    @Override
+    public ResponseEntity<String> deleteFile(String fileName) {
+        try {
+            Path filePath =  Paths.get(UPLOAD_DIR).resolve(fileName).normalize();
+
+            if (Files.deleteIfExists(filePath)){
+                return ResponseEntity.ok("successfully deleted file");
+            } else {
+                return new ResponseEntity<>("File not found.",HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            throw new FileHandleException("could not delete file ");
+
+        }
+    }
+
 
 }

@@ -10,4 +10,6 @@ public interface FileService {
     ResponseEntity<?> downloadFile(String fileName);
 
     ResponseEntity<String> appendFile(AppendFileDto appendFileDto);
+
+    ResponseEntity<String> deleteFile(String fileName);
 }
