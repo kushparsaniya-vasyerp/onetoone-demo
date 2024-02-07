@@ -1,4 +1,4 @@
-package dev.kush.onetoone.model;
+package dev.kush.onetoone.dto;
 
 public record AssignLaptopDto(
         Long studentId,

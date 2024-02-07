@@ -1,10 +1,10 @@
 package dev.kush.onetoone.service.impl;
 
 import dev.kush.onetoone.exception.UserNotFoundException;
-import dev.kush.onetoone.model.AssignLaptopDto;
+import dev.kush.onetoone.dto.AssignLaptopDto;
 import dev.kush.onetoone.model.Laptop;
 import dev.kush.onetoone.model.Student;
-import dev.kush.onetoone.model.StudentDto;
+import dev.kush.onetoone.dto.StudentDto;
 import dev.kush.onetoone.repository.LaptopRepository;
 import dev.kush.onetoone.repository.StudentRepository;
 import dev.kush.onetoone.service.StudentService;

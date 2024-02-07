@@ -1,9 +1,9 @@
 package dev.kush.onetoone.service;
 
 
-import dev.kush.onetoone.model.AssignLaptopDto;
+import dev.kush.onetoone.dto.AssignLaptopDto;
 import dev.kush.onetoone.model.Student;
-import dev.kush.onetoone.model.StudentDto;
+import dev.kush.onetoone.dto.StudentDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

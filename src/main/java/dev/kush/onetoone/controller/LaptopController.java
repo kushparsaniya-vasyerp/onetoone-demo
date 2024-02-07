@@ -1,7 +1,7 @@
 package dev.kush.onetoone.controller;
 
 import dev.kush.onetoone.model.Laptop;
-import dev.kush.onetoone.model.LaptopDto;
+import dev.kush.onetoone.dto.LaptopDto;
 import dev.kush.onetoone.service.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,11 @@ import java.util.List;
 @RequestMapping("/laptop")
 public class LaptopController {
 
-    private final LaptopService laptopService;
-
     @Autowired
-    public LaptopController(LaptopService laptopService) {
-        this.laptopService = laptopService;
-    }
+    private LaptopService laptopService;
+
+
+
 
     @GetMapping("/all")
     public ResponseEntity<List<Laptop>> getAllLaptop() {
@@ -34,6 +33,7 @@ public class LaptopController {
     public ResponseEntity<Laptop> addLaptop(@RequestBody LaptopDto laptopDto) {
         return laptopService.saveLaptop(laptopDto);
     }
+
 
 
 }

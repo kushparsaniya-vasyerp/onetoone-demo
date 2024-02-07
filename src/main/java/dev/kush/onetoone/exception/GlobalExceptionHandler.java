@@ -19,4 +19,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public Object UserNotFoundExceptionHandler(Exception ex, WebRequest request) {
         return new ExceptionMessage(ex.getMessage(), LocalDateTime.now(), NOT_FOUND);
     }
+
+    @ExceptionHandler(UploadFileException.class)
+    @ResponseStatus(INTERNAL_SERVER_ERROR)
+    public Object UploadFileExceptionHandler(Exception ex, WebRequest request){
+        return new ExceptionMessage(ex.getMessage(), LocalDateTime.now(), valueOf(500));
+    }
 }

@@ -1,4 +1,4 @@
-package dev.kush.onetoone.model;
+package dev.kush.onetoone.dto;
 
 import lombok.*;
 
