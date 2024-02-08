@@ -1,14 +1,18 @@
 package dev.kush.onetoone.controller;
 
 import dev.kush.onetoone.dto.AssignLaptopDto;
+import dev.kush.onetoone.exception.ResponseDto;
 import dev.kush.onetoone.model.Student;
 import dev.kush.onetoone.dto.StudentDto;
 import dev.kush.onetoone.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/student")
@@ -29,7 +33,7 @@ public class StudentController {
     }
 
     @GetMapping("/get/{studentId}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long studentId) {
+    public ResponseDto getStudentById(@PathVariable Long studentId) {
 
         return studentService.getStudentById(studentId);
     }

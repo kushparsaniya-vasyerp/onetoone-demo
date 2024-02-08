@@ -1,5 +1,6 @@
 package dev.kush.onetoone.service.impl;
 
+import dev.kush.onetoone.exception.ResponseDto;
 import dev.kush.onetoone.exception.UserNotFoundException;
 import dev.kush.onetoone.dto.AssignLaptopDto;
 import dev.kush.onetoone.model.Laptop;
@@ -40,8 +41,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity<Student> getStudentById(Long id) {
-        return new ResponseEntity<>(findStudentById(id), OK);
+    public ResponseDto getStudentById(Long id) {
+        return new ResponseDto(OK,"ok",findStudentById(id));
     }
 
 
