@@ -1,5 +1,8 @@
-package dev.kush.onetoone.exception;
+package dev.kush.onetoone.exception.advice;
 
+import dev.kush.onetoone.exception.FileHandleException;
+import dev.kush.onetoone.exception.ResponseDto;
+import dev.kush.onetoone.exception.UserNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
